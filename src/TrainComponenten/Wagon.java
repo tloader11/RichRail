@@ -1,4 +1,6 @@
-package Domain;
+package TrainComponenten;
+
+import Domain.Component;
 
 public class Wagon extends Component {
 	

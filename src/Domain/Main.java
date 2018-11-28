@@ -8,6 +8,8 @@ import java.io.UnsupportedEncodingException;
 
 import DataSource.DataHandler;
 import DataSource.FileHandler;
+import TrainComponenten.Locomotive;
+import TrainComponenten.Wagon;
 
 public class Main {
 
