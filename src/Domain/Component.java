@@ -3,6 +3,10 @@ package Domain;
 public class Component {
 	protected String type;
 	protected int id;
+	/**
+	 * Custom added
+	 */
+	protected String name;
 	
 
 
