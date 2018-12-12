@@ -16,24 +16,22 @@ public class Train {
 		this.componenten.add(c);
 	}
 	
+	public List getComponenten() {
+			return componenten;
+		}
 	
+	@Override
+	public String toString() {
+		String s = ";";
+		for (Object object : componenten) {
+			s += object + "," ;
+			
+		}
+	    s = s.substring(0, s.length() - 1);
 	
-public List getComponenten() {
-		return componenten;
+		s+=";";
+		return name;
+	
 	}
-
-@Override
-public String toString() {
-	String s = ";";
-	for (Object object : componenten) {
-		s += object + "," ;
-		
-	}
-    s = s.substring(0, s.length() - 1);
-
-	s+=";";
-	return name;
-
-}
 
 }

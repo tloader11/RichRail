@@ -6,9 +6,8 @@ public class Wagon extends Component {
 
 	private int seats;
 
-	public Wagon() {
-		super();
-		super.type = "Wagon";
+	public Wagon(String name) {
+		super(name, "Wagon");
 	}
 
 	public int getSeats() {

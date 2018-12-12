@@ -10,6 +10,12 @@ public class Component {
 	
 
 
+	public Component( String name,String type) {
+		super();
+		this.type = type;
+		this.name = name;
+	}
+
 	@Override
 	public String toString() {
 		String s = type + ","+id;

@@ -7,7 +7,10 @@ import java.util.Scanner;
 
 public class ConsoleReader extends Thread
 {
-    @Override
+    public static void added(String name) {
+    	System.out.println("Added "  + name  + " with success !");
+    }
+    
     public void run()
     {
         CommandProcessor processor = new CommandProcessor();
@@ -17,21 +20,13 @@ public class ConsoleReader extends Thread
             String command = scanner.nextLine();
             System.out.println("You issued the following command: " + command);
 
-            HashMap<String, Object> result = processor.executeCommand(command);
+            boolean result = processor.executeCommand(command);
 
-            if((boolean)result.get("success"))
+            if(result == true)
             {
-                if(result.get("type") == Train.class)
-                {
-                    Main.trainsList.add((Train)result.get("object"));
-                    System.out.println("Added train with success !");
-                }
-                else if(result.get("type") == Wagon.class)
-                {
-                    Main.componentsList.add((Wagon)result.get("object"));
-                    System.out.println("Added wagon with success !");
-                }
                 System.out.println("Added item with success !");
+            } else {
+            	System.out.println("Item was not added with success!");
             }
         }
     }
