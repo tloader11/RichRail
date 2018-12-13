@@ -1,6 +1,5 @@
 package Domain;
 
-import TrainComponenten.Wagon;
 
 import java.util.HashMap;
 import java.util.Scanner;

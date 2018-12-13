@@ -2,8 +2,6 @@ package Domain;
 
 import DataSource.DataHandler;
 import DataSource.FileHandler;
-import TrainComponenten.Locomotive;
-import TrainComponenten.Wagon;
 import Domain.Controller;
 
 import java.util.*;
@@ -11,7 +9,7 @@ import java.util.regex.Matcher;
 
 public class CommandProcessor
 {
-
+    private Controller cc = new Controller();
     private String _lastCommand;
 
     public CommandProcessor()
@@ -54,7 +52,6 @@ public class CommandProcessor
             if(c == commands.NEW)
             {
 	           for (int i = 0; i < m.groupCount(); i++) {
-	            	System.out.println(m.group(i));
 	               if(m.group(i)!= null) {
 	            	   allMatches.add(m.group(i));
 	               }                                                                      
@@ -63,16 +60,16 @@ public class CommandProcessor
                  	allMatches.add("0");
                  	  //index not exists
                  }
-            	 success = Controller.create(allMatches.get(2), allMatches.get(1), Integer.parseInt(allMatches.get(3)));
+            	 success = cc.create(allMatches.get(2), allMatches.get(1), Integer.parseInt(allMatches.get(3)));
             }
-            else if(c == commands.SAVE)
-            {
-            	success = Controller.save();
-            }
+//            else if(c == commands.SAVE)
+//            {
+//            	success = cc.save();
+//            }
             else if(c == commands.ADD)
             {
             	allMatches.add(m.group(2));
-            	success = Controller.add(m.group(1), m.group(2));
+            	success = cc.add(m.group(1), m.group(2));
             }
         }
         return success;

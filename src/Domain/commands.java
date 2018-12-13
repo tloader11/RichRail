@@ -1,7 +1,5 @@
 package Domain;
 
-import TrainComponenten.Locomotive;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

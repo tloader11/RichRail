@@ -3,35 +3,62 @@ package Domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import DataSource.DataHandler;
+import DataSource.FileHandler;
+import Domain.trainPart.*;
 public class Train {
-	String name;
-	List componenten;
+	private DataHandler dh = new FileHandler();
+	String code;
+	List<TrainPart> parts;
 	
-	public Train(String name) {
-		this.name = name;
-	this.componenten = new ArrayList<Component>();	
+	public Train(String code) {
+		this.code = code;
+	this.parts = new ArrayList<TrainPart>();	
+	dh.addTrain(this);
 	}
 	
-	public void addComponent(Component c) {
-		this.componenten.add(c);
+	public int getTrainSize() {
+		return this.parts.size();
 	}
 	
-	public List getComponenten() {
-			return componenten;
-		}
-	
-	@Override
-	public String toString() {
-		String s = ";";
-		for (Object object : componenten) {
-			s += object + "," ;
-			
-		}
-	    s = s.substring(0, s.length() - 1);
-	
-		s+=";";
-		return name;
-	
+	public String getCode() {
+		return code;
 	}
+
+
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
+
+	public void addParts(TrainPart trainpart) {
+		this.parts.add(trainpart);
+	}
+	
+	public void delParts(int index) {
+		this.parts.remove(index);
+	}
+	
+	
+	
+public List getPartsTypes() {
+	List l = new ArrayList();
+
+	for (Object o : parts) {
+		l.add(o.toString());
+	}
+		return this.parts;
+	}
+
+@Override
+public String toString() {
+	return "Train [code=" + code + ", parts=" + parts + "]";
+}
+
+
+
+
 
 }
