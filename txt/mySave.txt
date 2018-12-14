@@ -1,6 +1,0 @@
-dd 
-a 
-d 
-d 
-s 
-tg1 ,wg1

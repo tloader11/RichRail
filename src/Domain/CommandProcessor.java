@@ -56,16 +56,18 @@ public class CommandProcessor
 	            	   allMatches.add(m.group(i));
 	               }                                                                      
 	            }
-            	 if(4 != allMatches.size()){
+	            int numseats = 0;
+            	 if(5 != allMatches.size()){
                  	allMatches.add("0");
-                 	  //index not exists
+                 	numseats = 0;
+                 } else {
+                	 String s = allMatches.get(3).split("numseats ")[1];
+                	 numseats =  Integer.parseInt(s );
                  }
-            	 success = cc.create(allMatches.get(2), allMatches.get(1), Integer.parseInt(allMatches.get(3)));
+            	 
+            	 success = cc.create(allMatches.get(2), allMatches.get(1), numseats);
             }
-//            else if(c == commands.SAVE)
-//            {
-//            	success = cc.save();
-//            }
+
             else if(c == commands.ADD)
             {
             	allMatches.add(m.group(2));
