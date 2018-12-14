@@ -73,7 +73,7 @@ public class FileHandler implements DataHandler {
 	}
 
 	@Override
-	public List selectAllTrainCodes() {
+	public List<String> selectAllTrainCodes() {
 
 		return ed.selectAllcodes();
 	}

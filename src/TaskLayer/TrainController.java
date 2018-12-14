@@ -38,7 +38,7 @@ public class TrainController {
 
 	}
 
-	public List selectAllTrainCodes() {
+	public List<String> selectAllTrainCodes() {
 		return dh.selectAllTrainCodes();
 	}
 

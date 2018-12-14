@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 
 import java.io.UnsupportedEncodingException;
 
+import javax.swing.SwingUtilities;
+
 import DataSource.DataHandler;
 import DataSource.FileHandler;
 import DataSource.TextEditor;
@@ -44,7 +46,14 @@ public class Main {
 
 		System.out.println("Reader is running...!");
 
-		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				UserInterface inst = new UserInterface();
+				inst.setLocationRelativeTo(null);
+				inst.setVisible(true);
+				inst.loadTrains();
+			}
+		});
 		
 		
 		//tc.createTrain("red");

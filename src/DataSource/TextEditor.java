@@ -142,9 +142,9 @@ public class TextEditor {
 		}
 	
 	
-	public List selectAllcodes() {
+	public List<String> selectAllcodes() {
 		String trainCode;
-		List allCodes = new ArrayList<String>();
+		List<String> allCodes = new ArrayList<String>();
 
 		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 			String line;
