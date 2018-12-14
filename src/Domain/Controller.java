@@ -1,6 +1,7 @@
 package Domain;
 
 import java.awt.Component;
+import java.util.List;
 
 import DataSource.DataHandler;
 import DataSource.FileHandler;
@@ -44,12 +45,22 @@ public class Controller {
 //		return true;
 //	}
 
-	public static void remove() {
-
+	public boolean remove( String part,String train) {
+		tc.delTrainPart(train, part);
+		return true;
+	}
+	
+	public boolean delete(String name, String type) {
+		tc.delTrain(name);
+		return true;
 	}
 
-	public static void select() {
-
+	public Train select(String name) {
+		return tc.selectTrain(name);
+	}
+	
+	public List<String> selectAll() {
+		return tc.selectAllTrainCodes();
 	}
 
 }

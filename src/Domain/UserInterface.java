@@ -9,7 +9,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
@@ -50,9 +49,10 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	private int curTrain = -1;
 	private int OFFSET = 100;
 	private int TRAINLENGTH = 100;
-
+	
 	private Controller cc = new Controller();
 	private TrainController tc = new TrainController();
+
 	/**
 	 * Auto-generated main method to display this JFrame
 	 */
@@ -60,6 +60,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	public UserInterface() {
 		super();
 		initGUI();
+
 	}
 
 	private void initGUI() {
@@ -129,7 +130,6 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 					p2.add(cbAllTrains, new GridBagConstraints(1, 1, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER,
 							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 				}
-				
 				// --------------------BUTTONS------------------------//
 				{
 					btnNewTrain = new JButton();
@@ -169,17 +169,45 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 				// ---------------ADD--WAGON--BUTTONS------------------------//
 				{
 					btnAddWag1 = new JButton();
-					btnAddWag1.setText("Add wagon");
+					btnAddWag1.setText("Add wagon 1");
 					btnAddWag1.addActionListener(this);
 					pnlWagons.add(btnAddWag1, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+							GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+				}
+				{
+					btnAddWag2 = new JButton();
+					btnAddWag2.setText("Add wagon 2");
+					btnAddWag2.addActionListener(this);
+					pnlWagons.add(btnAddWag2, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+							GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+				}
+				{
+					btnAddWag3 = new JButton();
+					btnAddWag3.setText("Add wagon 3");
+					btnAddWag3.addActionListener(this);
+					pnlWagons.add(btnAddWag3, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 							GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 				}
 				// -------------DELETE--BUTTONS------------------------------//
 				{
 					btnDelWag1 = new JButton();
-					btnDelWag1.setText("Delete wagon");
+					btnDelWag1.setText("Delete wagon 1");
 					btnDelWag1.addActionListener(this);
 					pnlWagons.add(btnDelWag1, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+							GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+				}
+				{
+					btnDelWag2 = new JButton();
+					btnDelWag2.setText("Delete wagon 2");
+					btnDelWag2.addActionListener(this);
+					pnlWagons.add(btnDelWag2, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+							GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+				}
+				{
+					btnDelWag3 = new JButton();
+					btnDelWag3.setText("Delete wagon 3");
+					btnDelWag3.addActionListener(this);
+					pnlWagons.add(btnDelWag3, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 							GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 				}
 				// ---------------------------------------------------------//
@@ -196,11 +224,13 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 		if (event.getSource() == btnNewTrain) {
 			String train = tfNewTrain.getText();
 			if (train != null && train.trim().length() > 0) {
-				
-				cc.create(train, "train", 0);
-//				train = addTrain(train);
+				tc.createTrain(train);
+				addTrain("kaaas");
+				train = addTrain(train);
 				curTrain = cbAllTrains.getSelectedIndex();
-//				drawTrain(train);
+				drawTrain(train);
+				drawTrain("kaaas");
+				loadTrains();
 			}
 		} else if (event.getSource() == btnChooseTrain) {
 			if (cbAllTrains.getItemCount() > 0) {
@@ -247,10 +277,19 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 		} else if (event.getSource() == btnAddWag1) {
 			currentNumberOfWagons++;
 			drawWagon("Wagon1");
+		} else if (event.getSource() == btnAddWag2) {
+			currentNumberOfWagons++;
+			drawWagon("Wagon2");
+		} else if (event.getSource() == btnAddWag3) {
+			currentNumberOfWagons++;
+			drawWagon("Wagon3");
 		} else if (event.getSource() == btnDelWag1) {
 			repaint(30 + TRAINLENGTH, 80 + curTrain * OFFSET, 1, 1);
-		} 
-		loadTrains();
+		} else if (event.getSource() == btnDelWag2) {
+			repaint(30 + TRAINLENGTH, 80 + curTrain * OFFSET, 1, 1);
+		} else if (event.getSource() == btnDelWag3) {
+			repaint(30 + TRAINLENGTH, 80 + curTrain * OFFSET, 1, 1);
+		}
 	}
 
 	public String addTrain(String train) {
@@ -277,14 +316,6 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 		return t;
 
 	}
-	
-	public void loadTrains() {
-		for (String train : tc.selectAllTrainCodes()) {
-			System.out.println(train);
-			drawTrain(train);
-		}
-		
-	}
 
 	public void drawTrain(String train) {
 		if (train != "") {
@@ -299,6 +330,16 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			g.drawString(train, 40, 105 + curTrain * OFFSET);
 		}
 	}
+	
+	public void loadTrains() {
+		for (String train : tc.selectAllTrainCodes()) {
+			System.out.println(train);
+			
+			addTrain(train);
+			drawTrain(train);
+		}
+		
+	}
 
 	public void drawWagon(String wagon) {
 		Graphics g = drawPanel.getGraphics();
@@ -309,4 +350,5 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 		g.fillRoundRect(80 + currentNumberOfWagons * TRAINLENGTH, 120 + curTrain * OFFSET, 20, 20, 20, 20);
 		g.drawString(wagon, 40 + currentNumberOfWagons * TRAINLENGTH, 105 + curTrain * OFFSET);
 	}
+
 }

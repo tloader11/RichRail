@@ -70,7 +70,18 @@ public class CommandProcessor
             {
             	allMatches.add(m.group(2));
             	success = cc.add(m.group(1), m.group(2));
-            }
+            } 
+            else if(c == commands.DELETE)
+            {
+            	success = cc.delete(m.group(2),m.group(1));
+            }        
+            else if(c == commands.REMOVE)
+            {
+            	System.out.println(m.group(1) +m.group(2) );
+             	allMatches.add(m.group(2));
+            	success = cc.remove(m.group(1),m.group(2));
+            } 
+    
         }
         return success;
     }

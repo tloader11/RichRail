@@ -37,8 +37,16 @@ public class Train {
 		this.parts.add(trainpart);
 	}
 	
-	public void delParts(int index) {
-		this.parts.remove(index);
+	public void delParts(String part) {		
+		for (int i = 0 ; i <  this.parts.size(); i++) {
+            if(this.parts.get(0).toString().equals(part.toString())) {
+            	System.out.println(this.parts.get(i).toString());
+            	this.parts.remove(i);
+            	break;
+            }       
+		}
+		
+		System.out.println(this.parts);
 	}
 	
 	

@@ -30,9 +30,9 @@ public enum commands {
             case GETNUMSEATS:
                 return Pattern.compile("new (train) (\\S*);|new (wagon) (\\S*)( numseats (\\d*);)?");
             case DELETE:
-                return Pattern.compile("new (train) (\\S*);|new (wagon) (\\S*)( numseats (\\d*);)?");
+                return Pattern.compile("delete (train) (\\S*);|delete (wagon) (\\S*);)?");
             case REMOVE:
-                return Pattern.compile("new (train) (\\S*);|new (wagon) (\\S*)( numseats (\\d*);)?");
+                return Pattern.compile("remove (\\S*) from (\\S*);");
             case SAVE:
                 return Pattern.compile("save;");
         }
