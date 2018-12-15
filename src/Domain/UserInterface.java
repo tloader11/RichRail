@@ -19,7 +19,6 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 
@@ -49,7 +48,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	private int curTrain = -1;
 	private int OFFSET = 100;
 	private int TRAINLENGTH = 100;
-	
+
 	private Controller cc = new Controller();
 	private TrainController tc = new TrainController();
 
@@ -223,16 +222,15 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == btnNewTrain) {
 			String train = tfNewTrain.getText();
-			if (train != null && train.trim().length() > 0) {
-				tc.createTrain(train);
-				addTrain("kaaas");
-				train = addTrain(train);
-				curTrain = cbAllTrains.getSelectedIndex();
-				drawTrain(train);
-				drawTrain("kaaas");
-				loadTrains();
+			if (train.length() > 1) {
+				cc.create(train, "train", 2);
+				System.out.println(cc.selectAll());
+			} else {
+				System.out.println("Name too short!");
 			}
-		} else if (event.getSource() == btnChooseTrain) {
+		} else if (event.getSource() == btnChooseTrain)
+
+		{
 			if (cbAllTrains.getItemCount() > 0) {
 				String selection = (String) cbAllTrains.getSelectedItem();
 				tfCurTrain.setText("Selected: " + selection);
@@ -330,15 +328,15 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			g.drawString(train, 40, 105 + curTrain * OFFSET);
 		}
 	}
-	
+
 	public void loadTrains() {
 		for (String train : tc.selectAllTrainCodes()) {
 			System.out.println(train);
-			
+
 			addTrain(train);
 			drawTrain(train);
 		}
-		
+
 	}
 
 	public void drawWagon(String wagon) {
