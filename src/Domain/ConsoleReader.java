@@ -23,9 +23,9 @@ public class ConsoleReader extends Thread
 
             if(result == true)
             {
-                System.out.println("Added item with success !");
+                System.out.println("Command was executed succesfully!");
             } else {
-            	System.out.println("Item was not added with success!");
+            	System.out.println("Something went wrong!");
             }
         }
     }

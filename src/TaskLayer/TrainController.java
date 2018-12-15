@@ -14,7 +14,6 @@ public class TrainController {
 	// new train
 	public Train createTrain(String code) {
 		Train t1 = new Train(code);
-		System.out.println("train is added to the file mysave.txt");
 		return t1;
 	}
 

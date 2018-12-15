@@ -21,10 +21,8 @@ public class Controller {
 	public boolean create(String name, String type, int numseats) {
 		if (type != null && type.equalsIgnoreCase("train")) {
 			tc.createTrain(name);
-			ConsoleReader.added(type);
 		} else if (type != null && type.equalsIgnoreCase("wagon")) {
 			tpc.CreatePartType(name, numseats);
-			ConsoleReader.added(type);
 		}
 		return true;
 	}

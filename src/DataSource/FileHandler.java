@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import Domain.ConsoleReader;
 import Domain.Train;
 import Domain.trainPart.TrainPart;
 import Domain.trainPart.TrainPartFactory;
@@ -18,7 +19,14 @@ public class FileHandler implements DataHandler {
 	@Override
 	public void addTrain(Train t) {
 		try {
-			ed.write(ed.trainTotxt(t), f);
+			if(ed.selectAllcodes().size() < 3) {
+				ed.write(ed.trainTotxt(t), f);
+				System.out.println("train is added to the file mysave.txt");
+				ConsoleReader.added(t.getCode());
+			} else {
+				System.out.println("Maximum treinen bereikt");
+			}
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -82,7 +90,17 @@ public class FileHandler implements DataHandler {
 	public void addRollerType(String type, int zitPlaatsen) {
 		String s = type + ", " + zitPlaatsen + "\n";
 		try {
-			ed.write(s, t);
+			if(ed.selectAlltypes().size() < 6) {
+				if(ed.selectAlltypes().contains(s)){
+					System.out.println("as" + ed.selectAlltypes().contains(s));
+				}
+				ed.write(s, t);
+				System.out.println("wagon is added to the file types.txt");
+				ConsoleReader.added(type);
+			} else {
+				System.out.println("Maximum trainpart types bereikt");
+			}
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
