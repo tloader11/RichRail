@@ -28,7 +28,7 @@ public enum commands {
             case ADD:
                 return Pattern.compile("add (\\S*) to (\\S*);");
             case GETNUMSEATS:
-                return Pattern.compile("new (train) (\\S*);|new (wagon) (\\S*)( numseats (\\d*);)?");
+                return Pattern.compile("getnumseats (train) (\\S*);|getnumseats (wagon) (\\S*);?");
             case DELETE:
                 return Pattern.compile("delete (train) (\\S*);|delete (wagon) (\\S*);?");
             case REMOVE:

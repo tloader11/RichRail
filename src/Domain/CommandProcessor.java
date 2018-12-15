@@ -4,6 +4,8 @@ import DataSource.DataHandler;
 import DataSource.FileHandler;
 import Domain.Controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 
@@ -38,7 +40,7 @@ public class CommandProcessor
     	return commands.valueOf(output[0]);
     }
 
-    public boolean executeCommand(String command) {
+    public boolean executeCommand(String command) throws FileNotFoundException, IOException {
         this._lastCommand = command;
         boolean success = false;
         List<String> allMatches = new ArrayList<String>();
@@ -79,10 +81,21 @@ public class CommandProcessor
     	            }                                                                      
     	        }
             	success = cc.delete(allMatches.get(2), allMatches.get(1));
-            }        
+            }    
+            else if(c == commands.GETNUMSEATS)
+            {          
+            	for (int i = 0; i <= m.groupCount(); i++) {
+            		if(m.group(i)!= null) {
+            			allMatches.add(m.group(i).split(";")[0]);
+    	            }                                                                      
+    	        }
+            	int seats = 0;
+            	if(cc.getnumseats(allMatches.get(2), allMatches.get(1)) != 0) {
+            		success = true;
+            	}     	
+            } 
             else if(c == commands.REMOVE)
             {
-            	System.out.println(m.group(1) +m.group(2) );
              	allMatches.add(m.group(2));
             	success = cc.remove(m.group(1),m.group(2));
             } 

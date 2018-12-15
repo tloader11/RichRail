@@ -331,7 +331,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 
 	public void loadTrains() {
 		for (String train : tc.selectAllTrainCodes()) {
-			System.out.println(train);
+//			System.out.println(train);
 
 			addTrain(train);
 			drawTrain(train);

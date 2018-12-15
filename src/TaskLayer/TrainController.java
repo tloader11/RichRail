@@ -1,5 +1,7 @@
 package TaskLayer;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import DataSource.DataHandler;
@@ -7,6 +9,7 @@ import DataSource.FileHandler;
 import Domain.Train;
 import Domain.trainPart.TrainPart;
 import Domain.trainPart.TrainPartFactory;
+import Domain.trainPart.TrainPartType;
 
 public class TrainController {
 	private DataHandler dh = new FileHandler();
@@ -50,5 +53,15 @@ public class TrainController {
 		dh.deleteTrain(trainCode);
 
 	}
+	
+	public int selectZitplaatsen(String code) throws FileNotFoundException, IOException {
+		List<TrainPartType> tpt = dh.selectAllTypesFromTrain(code);
+		int i = 0;
+		for (TrainPartType tptt : tpt ) {
+			i += tptt.getZitPlaatsen();
+		} 
+		return i;
+	}
+
 
 }

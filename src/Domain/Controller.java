@@ -1,5 +1,7 @@
 package Domain;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import TaskLayer.TrainController;
@@ -42,10 +44,8 @@ public class Controller {
 
 	public boolean delete(String name, String type) {
 		if (type != null && type.equalsIgnoreCase("train")) {
-			System.out.println("del");
 			tc.delTrain(name);
 		} else if (type != null && type.equalsIgnoreCase("wagon")) {
-			System.out.println("delw");
 			tpc.delPartType(name);
 		}
 		
@@ -54,6 +54,17 @@ public class Controller {
 
 	public Train select(String name) {
 		return tc.selectTrain(name);
+	}
+	
+	public int getnumseats(String name, String type) throws FileNotFoundException, IOException {
+		int seats = 0;
+		if (type != null && type.equalsIgnoreCase("train")) {
+			seats = tc.selectZitplaatsen(name);
+		} else if (type != null && type.equalsIgnoreCase("wagon")) {
+			seats = tpc.selectZitplaats(name);
+		}
+		ConsoleReader.numbseats(type , name , seats);
+		return seats;
 	}
 
 	public List<String> selectAll() {

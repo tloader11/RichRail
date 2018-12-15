@@ -3,12 +3,15 @@ package DataSource;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import Domain.ConsoleReader;
 import Domain.Train;
 import Domain.trainPart.TrainPart;
+import Domain.trainPart.newType;
 import Domain.trainPart.TrainPartFactory;
+import Domain.trainPart.TrainPartType;
 
 public class FileHandler implements DataHandler {
 	File f = new File("txt/mySave.txt");
@@ -125,6 +128,26 @@ public class FileHandler implements DataHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<TrainPartType> selectAllTypesFromTrain(String code) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		List<TrainPartType> tpt = new ArrayList<TrainPartType>();		
+		for(String t : ed.findTrainWagons(code)) {	
+			if(!t.equals(code)) {
+				TrainPartType tp = new newType(ed.findWagon(t).get(0).toString(),Integer.parseInt(ed.findWagon(t).get(1).toString()));
+				tpt.add(tp);	
+			}
+		}
+		return tpt;
+	}
+
+	@Override
+	public TrainPartType selectType(String code) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		TrainPartType tp = new newType(ed.findWagon(code).get(0).toString(),Integer.parseInt(ed.findWagon(code).get(1).toString()));
+		return tp;
 	}
 
 }

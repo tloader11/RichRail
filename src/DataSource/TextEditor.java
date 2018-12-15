@@ -72,6 +72,42 @@ public class TextEditor {
 				if (items.get(0).trim().equalsIgnoreCase(code)) {
 					return items;
 				}
+//				System.out.println(items.get(0));
+			}
+		}
+		System.out.println("not found");
+		return null;
+
+	}
+	
+	public List findWagon(String code) throws FileNotFoundException, IOException {
+		List trainpart;
+
+		try (BufferedReader br = new BufferedReader(new FileReader(t))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				List<String> items = Arrays.asList(line.split("\\s*,\\s*"));
+				if (items.get(0).trim().equalsIgnoreCase(code)) {
+					return items;
+				}
+//				System.out.println(items.get(0));
+			}
+		}
+		System.out.println("not found");
+		return null;
+
+	}
+	
+	public List<String> findTrainWagons(String code) throws FileNotFoundException, IOException {
+		List train;
+
+		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				List<String> items = Arrays.asList(line.split("\\s*,\\s*"));
+				if (items.get(0).trim().equalsIgnoreCase(code)) {
+					return items;
+				}
 				System.out.println(items.get(0));
 			}
 		}

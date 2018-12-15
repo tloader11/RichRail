@@ -5,13 +5,17 @@ package Domain;
  */
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.swing.SwingUtilities;
 
+import TaskLayer.TrainController;
+import TaskLayer.TrainPartController;
+
 public class Main {
 
-	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+	public static void main(String[] args) throws IOException {
 		/*
 		 * 
 		 * 
@@ -26,7 +30,8 @@ public class Main {
 		 * tc.AddTrainPart("jaco", "Wagon");
 		 * 
 		 */
-
+		TrainController tc = new TrainController(); 
+		TrainPartController tpc = new TrainPartController();
 		System.out.println("Welcome to the RichRail interface! Please enter your command.");
 		System.out.println("use getcommands to see al available commands...!");
 
