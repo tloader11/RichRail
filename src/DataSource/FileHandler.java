@@ -18,11 +18,15 @@ public class FileHandler implements DataHandler {
 
 	@Override
 	public void addTrain(Train t) {
-		try {
+		try {	
 			if(ed.selectAllcodes().size() < 3) {
-				ed.write(ed.trainTotxt(t), f);
-				System.out.println("train is added to the file mysave.txt");
-				ConsoleReader.added(t.getCode());
+				if(!ed.selectAllcodes().contains(t.getCode())){
+					ed.write(ed.trainTotxt(t), f);
+					System.out.println("train is added to the file mysave.txt");
+					ConsoleReader.added(t.getCode());
+				} else {
+					System.out.println("Trein bestaat al");
+				}
 			} else {
 				System.out.println("Maximum treinen bereikt");
 			}
@@ -90,13 +94,14 @@ public class FileHandler implements DataHandler {
 	public void addRollerType(String type, int zitPlaatsen) {
 		String s = type + ", " + zitPlaatsen + "\n";
 		try {
-			if(ed.selectAlltypes().size() < 6) {
-				if(ed.selectAlltypes().contains(s)){
-					System.out.println("as" + ed.selectAlltypes().contains(s));
-				}
-				ed.write(s, t);
-				System.out.println("wagon is added to the file types.txt");
-				ConsoleReader.added(type);
+			if(ed.selectAlltypes().size() < 12) {
+				if(!ed.selectAlltypes().contains(type)){
+					ed.write(s, t);
+					System.out.println("wagon is added to the file types.txt");
+					ConsoleReader.added(type);
+				} else {
+					System.out.println("Wagon bestaat al");
+				}		
 			} else {
 				System.out.println("Maximum trainpart types bereikt");
 			}

@@ -102,7 +102,7 @@ public class TextEditor {
 		// spaceingChar ; is added in the end of the whole train
 		String s = "";
 		s += t.getCode();
-		s += " ,";
+		s += ",";
 
 		List parts = t.getPartsTypes();
 		Iterator i = parts.iterator();
