@@ -12,7 +12,7 @@ public class ConsoleReader extends Thread
     }
     
     public static void numbseats(String name, String type, int seats) {
-    	System.out.println("number of seats in "+ type  + " " + name  + ": " + seats );
+    	System.out.println("Number of seats in "+ type  + " " + name  + ": " + seats );
     }
     
     public void run()
@@ -34,7 +34,7 @@ public class ConsoleReader extends Thread
 
             if(result == true)
             {
-                System.out.println("Command was executed succesfully!");
+                System.out.println("==== Command was executed succesfully! ====");
             } else {
             	System.out.println("Something went wrong!");
             }

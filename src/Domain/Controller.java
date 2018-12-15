@@ -63,7 +63,7 @@ public class Controller {
 		} else if (type != null && type.equalsIgnoreCase("wagon")) {
 			seats = tpc.selectZitplaats(name);
 		}
-		ConsoleReader.numbseats(type , name , seats);
+		ConsoleReader.numbseats(name  ,type , seats);
 		return seats;
 	}
 
