@@ -49,7 +49,7 @@ public class TextEditor {
 			} else {
 				System.out.println("faild");
 			}
-
+			System.out.println(code + " deleted");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

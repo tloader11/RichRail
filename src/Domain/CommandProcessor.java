@@ -43,12 +43,10 @@ public class CommandProcessor
         boolean success = false;
         List<String> allMatches = new ArrayList<String>();
         commands c = processCommand(this._lastCommand);
-        
         if (check_command(c))
         {         
             Matcher m = c.getPattern(c).matcher(_lastCommand);
             m.find();
-         
             if(c == commands.NEW)
             {
 	           for (int i = 0; i < m.groupCount(); i++) {
@@ -74,8 +72,13 @@ public class CommandProcessor
             	success = cc.add(m.group(1), m.group(2));
             } 
             else if(c == commands.DELETE)
-            {
-            	success = cc.delete(m.group(2),m.group(1));
+            {          
+            	for (int i = 0; i <= m.groupCount(); i++) {
+            		if(m.group(i)!= null) {
+            			allMatches.add(m.group(i).split(";")[0]);
+    	            }                                                                      
+    	        }
+            	success = cc.delete(allMatches.get(2), allMatches.get(1));
             }        
             else if(c == commands.REMOVE)
             {

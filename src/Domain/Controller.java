@@ -41,7 +41,14 @@ public class Controller {
 	}
 
 	public boolean delete(String name, String type) {
-		tc.delTrain(name);
+		if (type != null && type.equalsIgnoreCase("train")) {
+			System.out.println("del");
+			tc.delTrain(name);
+		} else if (type != null && type.equalsIgnoreCase("wagon")) {
+			System.out.println("delw");
+			tpc.delPartType(name);
+		}
+		
 		return true;
 	}
 
