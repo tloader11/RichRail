@@ -218,11 +218,13 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == btnNewTrain) {
 			String train = tfNewTrain.getText();
-			if (train.length() > 1) {
+			if (train.length() > 1 || train.length() <= 10) {
 				cc.create(train, "train", 2);
 				System.out.println(cc.selectAll());
-			} else {
+			} else if (train.length() > 1) {
 				System.out.println("Name too short!");
+			} else {
+				System.out.println("Name too long!");
 			}
 		} else if (event.getSource() == btnChooseTrain)
 
@@ -280,7 +282,9 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	}
 
 	public void refreshGUI() {
-
+		Graphics g1 = drawPanel.getGraphics();
+		g1.setColor(Color.WHITE);
+		g1.fillRect(0, 0, 9000, 4000);
 		int curTrain = 0;
 		for (String train : cc.selectAll()) {
 			System.out.println("test - " + train);
