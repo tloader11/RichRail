@@ -28,7 +28,7 @@ public class TrainPartController {
 		return dh.selectAllTypes();
 
 	}
-	
+
 	public int selectZitplaats(String code) throws FileNotFoundException, IOException {
 		TrainPartType tpt = dh.selectType(code);
 		return tpt.getZitPlaatsen();
