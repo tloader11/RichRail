@@ -1,1 +1,1 @@
-tr1,wg1,wg2
+tr1,wg1,wg2ns
