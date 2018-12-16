@@ -40,6 +40,8 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	private JTextField tfNewTrain;
 	private JPanel p2;
 	private JPanel drawPanel;
+	private JTextPane tfWagonSeats;
+	private JTextPane tfTrainSeats;
 
 	private HashMap numberOfWagons;
 	private int currentNumberOfWagons = 0;
@@ -53,6 +55,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	public UserInterface() {
 		super();
 		initGUI();
+		refreshGUI();
 	}
 
 	private void initGUI() {
@@ -107,14 +110,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 					p2.add(tfNewTrain, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 							GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 				}
-				// {
-				// tfCurTrain = new JTextField();
-				// tfCurTrain.setEditable(false);
-				// p2.add(tfCurTrain, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
-				// GridBagConstraints.CENTER,
-				// GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-				// tfCurTrain.setText("No train selected.");
-				// }
+
 				// --------------------BUTTONS---PANEL------------------------//
 				{
 					pnlWagons = new JPanel();
@@ -127,6 +123,16 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 					p3.columnWidths = new int[] { 7, 7, 7, 7 };
 					pnlWagons.setLayout(p3);
 					pnlWagons.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
+					{
+						tfTrainSeats = new JTextPane();
+						pnlWagons.add(tfTrainSeats, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+								GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+					}
+					{
+						tfWagonSeats = new JTextPane();
+						pnlWagons.add(tfWagonSeats, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+								GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+					}
 
 					// ---------------COMBOBOX--SELECT------------------------//
 					{
@@ -143,7 +149,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 						cbAllWagons = new JComboBox();
 						cbAllWagons.setModel(cbAllWagonsModel);
 						pnlWagons.add(cbAllWagons,
-								new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+								new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 										GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
 					}
@@ -155,14 +161,6 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 						btnNewTrain.setText("Make new train");
 						btnNewTrain.addActionListener(this);
 					}
-					// {
-					// btnChooseTrain = new JButton();
-					// p2.add(btnChooseTrain, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
-					// GridBagConstraints.CENTER,
-					// GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-					// btnChooseTrain.setText("Select train");
-					// btnChooseTrain.addActionListener(this);
-					// }
 					{
 						btnDelTrain = new JButton();
 						p2.add(btnDelTrain, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
@@ -190,7 +188,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 				}
 			}
 			pack();
-			setSize(1000, 800);
+			setSize(1200, 800);
 			numberOfWagons = new HashMap();
 			loadTrains();
 		} catch (Exception e) {
@@ -297,8 +295,6 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			g.fillRoundRect(80, 120 + curTrain * OFFSET, 20, 20, 20, 20);
 			g.drawString(train, 40, 105 + curTrain * OFFSET);
 			for (Object wagon : cc.select(train).getPartsTypes()) {
-				System.out.println(cc.select(train).getPartsTypes());
-				// System.out.print(wagon);
 				g.setColor(Color.LIGHT_GRAY);
 				g.fillRect(30 + wagonsAmnt * TRAINLENGTH, 80 + curTrain * OFFSET, 80, 40);
 				g.setColor(Color.BLACK);
@@ -310,20 +306,10 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			curTrain += 1;
 		}
 
-	}
+		// tfTrainSeats.setText(selectZitplaats(cbAllTrains.getSelectedItem().toString()));
+		// tfWagonSeats.setText(selectZitplaatsen((String)
+		// cbAllTrains.getSelectedItem()));
 
-	// public void drawWagon(String wagon) {
-	// Graphics g = drawPanel.getGraphics();
-	// g.setColor(Color.LIGHT_GRAY);
-	// g.fillRect(30 + currentNumberOfWagons * TRAINLENGTH, 80 + 1 * OFFSET, 80,
-	// 40);
-	// g.setColor(Color.BLACK);
-	// g.fillRoundRect(35 + currentNumberOfWagons * TRAINLENGTH, 120 + 1 * OFFSET,
-	// 20, 20, 20, 20);
-	// g.fillRoundRect(80 + currentNumberOfWagons * TRAINLENGTH, 120 + 1 * OFFSET,
-	// 20, 20, 20, 20);
-	// g.drawString(wagon, 40 + currentNumberOfWagons * TRAINLENGTH, 105 + 1 *
-	// OFFSET);
-	// }
+	}
 
 }
