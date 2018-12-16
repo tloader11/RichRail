@@ -45,21 +45,15 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 
 	private HashMap numberOfWagons;
 	private int currentNumberOfWagons;
-	private int curTrain = -1;
 	private int OFFSET = 100;
 	private int TRAINLENGTH = 100;
 
 	private Controller cc = new Controller();
 	private TrainController tc = new TrainController();
 
-	/**
-	 * Auto-generated main method to display this JFrame
-	 */
-
 	public UserInterface() {
 		super();
 		initGUI();
-
 	}
 
 	private void initGUI() {
@@ -74,7 +68,6 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			lo.columnWeights = new double[] { 0.1, 0.1, 0.1 };
 			lo.columnWidths = new int[] { 7, 7, 7 };
 			getContentPane().setLayout(lo);
-
 			// -----------------PANEL--BOVEN----------------------//
 			{
 				p1 = new JPanel();
@@ -128,6 +121,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 					cbAllTrains.setModel(cbAllTrainsModel);
 					p2.add(cbAllTrains, new GridBagConstraints(1, 1, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER,
 							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+
 				}
 				// --------------------BUTTONS------------------------//
 				{
@@ -214,6 +208,8 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			pack();
 			setSize(1000, 800);
 			numberOfWagons = new HashMap();
+			Thread.sleep(500);
+			refreshGUI();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -234,60 +230,21 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			if (cbAllTrains.getItemCount() > 0) {
 				String selection = (String) cbAllTrains.getSelectedItem();
 				tfCurTrain.setText("Selected: " + selection);
-				int ti = cbAllTrains.getSelectedIndex();
-				if (ti != curTrain) {
-					numberOfWagons.put(curTrain, currentNumberOfWagons);
-				}
-				curTrain = ti;
-				try {
-					currentNumberOfWagons = (Integer) numberOfWagons.get(curTrain);
-				} catch (Exception e) {
-					currentNumberOfWagons = 0;
-				}
 			}
 		} else if (event.getSource() == btnDelTrain) {
-			if (cbAllTrains.getItemCount() > 0) {
-				String t = (String) cbAllTrains.getSelectedItem();
-				cbAllTrains.removeItemAt(cbAllTrains.getSelectedIndex());
-				numberOfWagons.remove(t);
-				Graphics g = drawPanel.getGraphics();
-				g.setColor(Color.WHITE);
-				System.out.println(curTrain + " - " + OFFSET);
-				if (cbAllTrains.getItemCount() == 0) {
-					g.fillRect(30, 40 + 0 * OFFSET, 1000, 100);
-					g.fillRect(30, 40 + 1 * OFFSET, 1000, 100);
-					g.fillRect(30, 40 + 2 * OFFSET, 1000, 100);
-				}
-				if (curTrain == cbAllTrains.getItemCount()) {
-					System.out.println(curTrain + "test" + cbAllTrains.getItemCount());
-					g.fillRect(30, 40 + 2 * OFFSET, 1000, 100);
-				} else {
-					g.fillRect(30, 40 + curTrain * OFFSET, 1000, 100);
-				}
-				if ((String) cbAllTrains.getSelectedItem() != null) {
-					curTrain = cbAllTrains.getSelectedIndex();
-					tfCurTrain.setText("selected: " + (String) cbAllTrains.getSelectedItem());
-				} else {
-					curTrain = 0;
-					tfCurTrain.setText("No train selected.");
-				}
+			String t = (String) cbAllTrains.getSelectedItem();
+			String trainName = t.trim();
+			System.out.println(trainName);
+			cc.delete(trainName, "train");
+			refreshCB();
+			if ((String) cbAllTrains.getSelectedItem() != null) {
+				tfCurTrain.setText("Selected: " + (String) cbAllTrains.getSelectedItem());
+			} else {
+				tfCurTrain.setText("No train selected.");
 			}
-		} else if (event.getSource() == btnAddWag1) {
-			currentNumberOfWagons++;
-			drawWagon("Wagon1");
-		} else if (event.getSource() == btnAddWag2) {
-			currentNumberOfWagons++;
-			drawWagon("Wagon2");
-		} else if (event.getSource() == btnAddWag3) {
-			currentNumberOfWagons++;
-			drawWagon("Wagon3");
-		} else if (event.getSource() == btnDelWag1) {
-			repaint(30 + TRAINLENGTH, 80 + curTrain * OFFSET, 1, 1);
-		} else if (event.getSource() == btnDelWag2) {
-			repaint(30 + TRAINLENGTH, 80 + curTrain * OFFSET, 1, 1);
-		} else if (event.getSource() == btnDelWag3) {
-			repaint(30 + TRAINLENGTH, 80 + curTrain * OFFSET, 1, 1);
 		}
+		refreshCB();
+		refreshGUI();
 	}
 
 	public String addTrain(String train) {
@@ -301,22 +258,32 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 					break;
 				}
 			}
-			if (t != "") {
-				if (curTrain >= 0) {
-					numberOfWagons.put(curTrain, currentNumberOfWagons);
-				}
-				cbAllTrains.addItem(t);
-				cbAllTrains.setSelectedItem(t);
-				numberOfWagons.put(t, 0);
-			}
 		} catch (Exception e) {
 		}
 		return t;
 
 	}
 
-	public void drawTrain(String train) {
-		if (train != "") {
+	public void loadTrains() {
+		for (String train : tc.selectAllTrainCodes()) {
+			addTrain(train);
+		}
+		refreshGUI();
+		refreshCB();
+	}
+
+	public void refreshCB() {
+		cbAllTrains.removeAllItems();
+		for (String train : cc.selectAll()) {
+			cbAllTrains.addItem(train);
+		}
+	}
+
+	public void refreshGUI() {
+
+		int curTrain = 0;
+		for (String train : cc.selectAll()) {
+			System.out.println("test - " + train);
 			Graphics g = drawPanel.getGraphics();
 			g.setColor(Color.LIGHT_GRAY);
 			g.fillRect(30, 80 + curTrain * OFFSET, 80, 40);
@@ -326,27 +293,23 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			g.fillRoundRect(35, 120 + curTrain * OFFSET, 20, 20, 20, 20);
 			g.fillRoundRect(80, 120 + curTrain * OFFSET, 20, 20, 20, 20);
 			g.drawString(train, 40, 105 + curTrain * OFFSET);
+			curTrain += 1;
 		}
 	}
 
-	public void loadTrains() {
-		for (String train : tc.selectAllTrainCodes()) {
-//			System.out.println(train);
-
-			addTrain(train);
-			drawTrain(train);
-		}
-
-	}
-
-	public void drawWagon(String wagon) {
-		Graphics g = drawPanel.getGraphics();
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect(30 + currentNumberOfWagons * TRAINLENGTH, 80 + curTrain * OFFSET, 80, 40);
-		g.setColor(Color.BLACK);
-		g.fillRoundRect(35 + currentNumberOfWagons * TRAINLENGTH, 120 + curTrain * OFFSET, 20, 20, 20, 20);
-		g.fillRoundRect(80 + currentNumberOfWagons * TRAINLENGTH, 120 + curTrain * OFFSET, 20, 20, 20, 20);
-		g.drawString(wagon, 40 + currentNumberOfWagons * TRAINLENGTH, 105 + curTrain * OFFSET);
-	}
+	// }
+	// public void drawWagon(String wagon) {
+	// Graphics g = drawPanel.getGraphics();
+	// g.setColor(Color.LIGHT_GRAY);
+	// g.fillRect(30 + currentNumberOfWagons * TRAINLENGTH, 80 + curTrain * OFFSET,
+	// 80, 40);
+	// g.setColor(Color.BLACK);
+	// g.fillRoundRect(35 + currentNumberOfWagons * TRAINLENGTH, 120 + curTrain *
+	// OFFSET, 20, 20, 20, 20);
+	// g.fillRoundRect(80 + currentNumberOfWagons * TRAINLENGTH, 120 + curTrain *
+	// OFFSET, 20, 20, 20, 20);
+	// g.drawString(wagon, 40 + currentNumberOfWagons * TRAINLENGTH, 105 + curTrain
+	// * OFFSET);
+	// }
 
 }
