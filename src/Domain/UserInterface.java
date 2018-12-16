@@ -190,7 +190,8 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			pack();
 			setSize(1200, 800);
 			numberOfWagons = new HashMap();
-			loadTrains();
+			this.loadTrains();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
