@@ -107,13 +107,14 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 					p2.add(tfNewTrain, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 							GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 				}
-				{
-					tfCurTrain = new JTextField();
-					tfCurTrain.setEditable(false);
-					p2.add(tfCurTrain, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-					tfCurTrain.setText("No train selected.");
-				}
+				// {
+				// tfCurTrain = new JTextField();
+				// tfCurTrain.setEditable(false);
+				// p2.add(tfCurTrain, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+				// GridBagConstraints.CENTER,
+				// GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+				// tfCurTrain.setText("No train selected.");
+				// }
 				// --------------------BUTTONS---PANEL------------------------//
 				{
 					pnlWagons = new JPanel();
@@ -132,7 +133,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 						ComboBoxModel cbAllTrainsModel = new DefaultComboBoxModel(new String[] {});
 						cbAllTrains = new JComboBox();
 						cbAllTrains.setModel(cbAllTrainsModel);
-						p2.add(cbAllTrains, new GridBagConstraints(1, 1, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER,
+						p2.add(cbAllTrains, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 								GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
 					}
@@ -154,16 +155,17 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 						btnNewTrain.setText("Make new train");
 						btnNewTrain.addActionListener(this);
 					}
-					{
-						btnChooseTrain = new JButton();
-						p2.add(btnChooseTrain, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-								GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-						btnChooseTrain.setText("Select train");
-						btnChooseTrain.addActionListener(this);
-					}
+					// {
+					// btnChooseTrain = new JButton();
+					// p2.add(btnChooseTrain, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
+					// GridBagConstraints.CENTER,
+					// GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+					// btnChooseTrain.setText("Select train");
+					// btnChooseTrain.addActionListener(this);
+					// }
 					{
 						btnDelTrain = new JButton();
-						p2.add(btnDelTrain, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+						p2.add(btnDelTrain, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 								GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						btnDelTrain.setText("Delete train");
 						btnDelTrain.addActionListener(this);
