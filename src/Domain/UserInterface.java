@@ -284,6 +284,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 		g1.fillRect(0, 0, 9000, 4000);
 		int curTrain = 0;
 		for (String train : cc.selectAll()) {
+			int wagonsAmnt = 1;
 			Graphics g = drawPanel.getGraphics();
 			g.setColor(Color.LIGHT_GRAY);
 			g.fillRect(30, 80 + curTrain * OFFSET, 80, 40);
@@ -294,13 +295,15 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			g.fillRoundRect(80, 120 + curTrain * OFFSET, 20, 20, 20, 20);
 			g.drawString(train, 40, 105 + curTrain * OFFSET);
 			for (Object wagon : cc.select(train).getPartsTypes()) {
-				System.out.print(wagon);
+				System.out.println(cc.select(train).getPartsTypes());
+				// System.out.print(wagon);
 				g.setColor(Color.LIGHT_GRAY);
-				g.fillRect(30 + 2 * TRAINLENGTH, 80 + curTrain * OFFSET, 80, 40);
+				g.fillRect(30 + wagonsAmnt * TRAINLENGTH, 80 + curTrain * OFFSET, 80, 40);
 				g.setColor(Color.BLACK);
-				g.fillRoundRect(35 + 2 * TRAINLENGTH, 120 + curTrain * OFFSET, 20, 20, 20, 20);
-				g.fillRoundRect(80 + 2 * TRAINLENGTH, 120 + curTrain * OFFSET, 20, 20, 20, 20);
-				g.drawString(wagon.toString(), 40 + 2 * TRAINLENGTH, 105 + curTrain * OFFSET);
+				g.fillRoundRect(35 + wagonsAmnt * TRAINLENGTH, 120 + curTrain * OFFSET, 20, 20, 20, 20);
+				g.fillRoundRect(80 + wagonsAmnt * TRAINLENGTH, 120 + curTrain * OFFSET, 20, 20, 20, 20);
+				g.drawString(wagon.toString(), 40 + wagonsAmnt * TRAINLENGTH, 105 + curTrain * OFFSET);
+				wagonsAmnt += 1;
 			}
 			curTrain += 1;
 		}
