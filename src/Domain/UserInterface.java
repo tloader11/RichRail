@@ -42,7 +42,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	private JPanel drawPanel;
 
 	private HashMap numberOfWagons;
-	private int currentNumberOfWagons;
+	private int currentNumberOfWagons = 0;
 	private int OFFSET = 100;
 	private int TRAINLENGTH = 100;
 
@@ -53,7 +53,6 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	public UserInterface() {
 		super();
 		initGUI();
-
 	}
 
 	private void initGUI() {
@@ -118,14 +117,14 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 				// --------------------BUTTONS---PANEL------------------------//
 				{
 					pnlWagons = new JPanel();
-					GridBagLayout p3Lay = new GridBagLayout();
+					GridBagLayout p3 = new GridBagLayout();
 					getContentPane().add(pnlWagons, new GridBagConstraints(1, 2, 2, 3, 0.0, 0.0,
 							GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-					p3Lay.rowWeights = new double[] { 0.1, 0.1, 0.1, 0.1 };
-					p3Lay.rowHeights = new int[] { 7, 7, 7, 7 };
-					p3Lay.columnWeights = new double[] { 0.1, 0.1, 0.1, 0.1 };
-					p3Lay.columnWidths = new int[] { 7, 7, 7, 7 };
-					pnlWagons.setLayout(p3Lay);
+					p3.rowWeights = new double[] { 0.1, 0.1, 0.1, 0.1 };
+					p3.rowHeights = new int[] { 7, 7, 7, 7 };
+					p3.columnWeights = new double[] { 0.1, 0.1, 0.1, 0.1 };
+					p3.columnWidths = new int[] { 7, 7, 7, 7 };
+					pnlWagons.setLayout(p3);
 					pnlWagons.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 
 					// ---------------COMBOBOX--SELECT------------------------//
@@ -273,10 +272,9 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			cbAllTrains.addItem(train);
 		}
 		cbAllWagons.removeAllItems();
-		for (Object type : tpc.selectPartTypes()) {
-
-			System.out.println(type);
+		for (String type : cc.getTypes()) {
 			cbAllWagons.addItem(type);
+
 		}
 	}
 
@@ -295,18 +293,32 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			g.fillRoundRect(35, 120 + curTrain * OFFSET, 20, 20, 20, 20);
 			g.fillRoundRect(80, 120 + curTrain * OFFSET, 20, 20, 20, 20);
 			g.drawString(train, 40, 105 + curTrain * OFFSET);
+			for (Object wagon : cc.select(train).getPartsTypes()) {
+				System.out.print(wagon);
+				g.setColor(Color.LIGHT_GRAY);
+				g.fillRect(30 + 2 * TRAINLENGTH, 80 + curTrain * OFFSET, 80, 40);
+				g.setColor(Color.BLACK);
+				g.fillRoundRect(35 + 2 * TRAINLENGTH, 120 + curTrain * OFFSET, 20, 20, 20, 20);
+				g.fillRoundRect(80 + 2 * TRAINLENGTH, 120 + curTrain * OFFSET, 20, 20, 20, 20);
+				g.drawString(wagon.toString(), 40 + 2 * TRAINLENGTH, 105 + curTrain * OFFSET);
+			}
 			curTrain += 1;
 		}
+
 	}
 
-	public void drawWagon(String wagon) {
-		Graphics g = drawPanel.getGraphics();
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect(30 + currentNumberOfWagons * TRAINLENGTH, 80 + 1 * OFFSET, 80, 40);
-		g.setColor(Color.BLACK);
-		g.fillRoundRect(35 + currentNumberOfWagons * TRAINLENGTH, 120 + 1 * OFFSET, 20, 20, 20, 20);
-		g.fillRoundRect(80 + currentNumberOfWagons * TRAINLENGTH, 120 + 1 * OFFSET, 20, 20, 20, 20);
-		g.drawString(wagon, 40 + currentNumberOfWagons * TRAINLENGTH, 105 + 1 * OFFSET);
-	}
+	// public void drawWagon(String wagon) {
+	// Graphics g = drawPanel.getGraphics();
+	// g.setColor(Color.LIGHT_GRAY);
+	// g.fillRect(30 + currentNumberOfWagons * TRAINLENGTH, 80 + 1 * OFFSET, 80,
+	// 40);
+	// g.setColor(Color.BLACK);
+	// g.fillRoundRect(35 + currentNumberOfWagons * TRAINLENGTH, 120 + 1 * OFFSET,
+	// 20, 20, 20, 20);
+	// g.fillRoundRect(80 + currentNumberOfWagons * TRAINLENGTH, 120 + 1 * OFFSET,
+	// 20, 20, 20, 20);
+	// g.drawString(wagon, 40 + currentNumberOfWagons * TRAINLENGTH, 105 + 1 *
+	// OFFSET);
+	// }
 
 }
