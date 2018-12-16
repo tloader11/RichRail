@@ -28,7 +28,7 @@ public class FileHandler implements DataHandler {
 					System.out.println("train is added to the file mysave.txt");
 					ConsoleReader.added(t.getCode());
 				} else {
-					System.out.println("Trein bestaat");
+//					System.out.println("Trein bestaat");
 				}
 			} else {
 				System.out.println("Maximum treinen bereikt");
@@ -103,7 +103,7 @@ public class FileHandler implements DataHandler {
 					System.out.println("wagon is added to the file types.txt");
 					ConsoleReader.added(type);
 				} else {
-					System.out.println("Wagon bestaat");
+//					System.out.println("Wagon bestaat");
 				}		
 			} else {
 				System.out.println("Maximum trainpart types bereikt");
