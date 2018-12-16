@@ -9,6 +9,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
@@ -40,8 +42,10 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	private JTextField tfNewTrain;
 	private JPanel p2;
 	private JPanel drawPanel;
-	private JTextPane tfWagonSeats;
-	private JTextPane tfTrainSeats;
+	private JTextPane tpWagonSeats;
+	private JTextPane tpTrainSeats;
+	private String wagName;
+	private String trainName;
 
 	private HashMap numberOfWagons;
 	private int currentNumberOfWagons = 0;
@@ -124,13 +128,13 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 					pnlWagons.setLayout(p3);
 					pnlWagons.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 					{
-						tfTrainSeats = new JTextPane();
-						pnlWagons.add(tfTrainSeats, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+						tpTrainSeats = new JTextPane();
+						pnlWagons.add(tpTrainSeats, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
 								GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 					}
 					{
-						tfWagonSeats = new JTextPane();
-						pnlWagons.add(tfWagonSeats, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+						tpWagonSeats = new JTextPane();
+						pnlWagons.add(tpWagonSeats, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
 								GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 					}
 
@@ -306,11 +310,18 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 			}
 			curTrain += 1;
 		}
-
-		// tfTrainSeats.setText(selectZitplaats(cbAllTrains.getSelectedItem().toString()));
-		// tfWagonSeats.setText(selectZitplaatsen((String)
-		// cbAllTrains.getSelectedItem()));
-
+		try {
+			wagName = (String) cbAllTrains.getSelectedItem();
+			trainName = (String) cbAllWagons.getSelectedItem();
+			tpTrainSeats.setText(trainName + " " + String.valueOf(tpc.selectZitplaats(wagName)));
+			tpWagonSeats.setText(wagName + " " + String.valueOf(tc.selectZitplaatsen(trainName)));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 	}
-
 }
