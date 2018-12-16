@@ -24,14 +24,25 @@ public class Main {
 		reader.start();
 
 		System.out.println("Reader is running...!");
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				UserInterface inst = new UserInterface();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-				inst.loadTrains();
-			}
-		});
+
+		if(args.length == 0)
+		{
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					UserInterface inst = new UserInterface();
+					inst.setLocationRelativeTo(null);
+					inst.setVisible(true);
+					inst.loadTrains();
+				}
+			});
+		}
+		else if(args[0].equalsIgnoreCase("-c"))
+		{
+			//console only!
+			System.out.println("Started in console only mode...!");
+		}
+
+
 
 		// tc.createTrain("red");
 

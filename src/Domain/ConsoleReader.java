@@ -32,7 +32,7 @@ public class ConsoleReader extends Thread
 				e.printStackTrace();
 			}
 
-            if(result == true)
+            if(result)
             {
                 System.out.println("==== Command was executed succesfully! ====");
             } else {
