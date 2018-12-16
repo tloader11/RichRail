@@ -15,8 +15,8 @@ public class Main {
 		 * TrainPartController(); //tc.createTrain("jaco"); tc.AddTrainPart("jaco",
 		 * "Wagon");
 		 */
-		TrainController tc = new TrainController();
-		TrainPartController tpc = new TrainPartController();
+	    TrainController tc = new TrainController();
+	    TrainPartController tpc = new TrainPartController();
 		System.out.println("Welcome to the RichRail interface! Please enter your command.");
 		System.out.println("use getcommands to see al available commands...!");
 
