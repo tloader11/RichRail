@@ -1,7 +1,9 @@
 package Domain;
 
+import java.awt.datatransfer.StringSelection;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import TaskLayer.TrainController;
@@ -69,6 +71,18 @@ public class Controller {
 
 	public List<String> selectAll() {
 		return tc.selectAllTrainCodes();
+	}
+	
+	public ArrayList<String> getTypes(){
+		
+		ArrayList<String> arr = new ArrayList<String>();
+		for(int i = 0; i< tpc.selectPartTypes().size() ;i += 2) {
+			String s = tpc.selectPartTypes().get(i).toString();
+			arr.add(s);		
+		}
+			
+		return arr;
+		
 	}
 
 }
