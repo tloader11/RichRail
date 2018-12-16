@@ -6,7 +6,6 @@ import java.util.List;
 
 import Domain.Train;
 import Domain.trainPart.TrainPartType;
-
 public interface DataHandler {
 	public void addTrain(Train t);
 
