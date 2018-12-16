@@ -4,6 +4,8 @@ Please use -c command line argument to execute this program in console-only mode
 `java -jar RichRail.jar` for GUI mode.
 
 `java -jar RichRail.jar -c` for console mode.
+
+Download de Build folder voor een pre-compiled versie van de source code..!
 # Patterns and Frameworks Project
 A public transport company has a little system with which they are administrating their trains and wagons.
 The system has been very poorly designed and constructed (© Jeroen Weber - poor code and errors).
