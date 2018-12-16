@@ -1,12 +1,6 @@
 package Domain;
 
-/* this class is for test use
- * plz note that is is only connected to the controller classes 
- */
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.swing.SwingUtilities;
 
@@ -17,20 +11,11 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		/*
-		 * 
-		 * 
 		 * TrainController tc = new TrainController(); TrainPartController tpc = new
-		 * TrainPartController();
-		 * 
-		 * //tc.createTrain("jaco");
-		 * 
-		 * 
-		 * 
-		 * 
-		 * tc.AddTrainPart("jaco", "Wagon");
-		 * 
+		 * TrainPartController(); //tc.createTrain("jaco"); tc.AddTrainPart("jaco",
+		 * "Wagon");
 		 */
-		TrainController tc = new TrainController(); 
+		TrainController tc = new TrainController();
 		TrainPartController tpc = new TrainPartController();
 		System.out.println("Welcome to the RichRail interface! Please enter your command.");
 		System.out.println("use getcommands to see al available commands...!");

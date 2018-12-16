@@ -54,6 +54,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	public UserInterface() {
 		super();
 		initGUI();
+		refreshGUI();
 	}
 
 	private void initGUI() {
@@ -218,7 +219,7 @@ public class UserInterface extends javax.swing.JFrame implements ActionListener 
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == btnNewTrain) {
 			String train = tfNewTrain.getText();
-			if (train.length() > 1 || train.length() <= 10) {
+			if (train.length() > 1 && train.length() <= 10) {
 				cc.create(train, "train", 2);
 				System.out.println(cc.selectAll());
 			} else if (train.length() > 1) {
