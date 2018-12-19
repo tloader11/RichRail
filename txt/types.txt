@@ -1,2 +1,5 @@
-wg1, 10
 wg2, 20
+mazda, 90
+Locomotive, 20
+passenger_Firstclass, 25
+passenger_Secoundclass, 25
