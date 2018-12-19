@@ -1,1 +1,2 @@
-trein123
+trein123,wg2,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1
+new,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1,wg1
